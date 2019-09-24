@@ -1,0 +1,35 @@
+{
+  "name": "serverless-lambda-layer-packager",
+  "version": "1.0.0",
+  "description": "A Serverless plugin that allows you to maintain your normal project structure while developing Lambda Layers.",
+  "main": "index.js",
+  "dependencies": {
+    "chalk": "^2.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bramhoven/serverless-lambda-layer-packager.git"
+  },
+  "keywords": [
+    "serverless",
+    "serverless framework",
+    "serverless lambda",
+    "serverless layer",
+    "serverless lambda layer",
+    "aws",
+    "lambda",
+    "layer",
+    "packager",
+    "serverless lambda layer packager"
+  ],
+  "author": "Bram Hoven <bram.hoven@hotmail.com> (https://bramhoven.nl)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bramhoven/serverless-lambda-layer-packager/issues"
+  },
+  "homepage": "https://github.com/bramhoven/serverless-lambda-layer-packager#readme"
+}
