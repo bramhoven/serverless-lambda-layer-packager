@@ -8,8 +8,8 @@ class ServerlessLambdaLayerPackager {
     this.serverless = serverless;
     this.options = options;
 
-    this.pathPrefix = FileManager.validatePrefix(this.serverless.service.custom.serverlessLambdaLayerPackager.pathPrefix);
-    this.runtime = this.serverless.service.custom.serverlessLambdaLayerPackager.runtime;
+    this.pathPrefix = FileManager.validatePrefix(this.serverless.service.custom['serverless-lambda-layer-packager'].pathPrefix);
+    this.runtime = this.serverless.service.custom['serverless-lambda-layer-packager'].runtime;
 
     this.commands = {};
 
