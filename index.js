@@ -8,16 +8,19 @@ class ServerlessLambdaLayerPackager {
     this.serverless = serverless;
     this.options = options;
     
-    this.layers = this.serverless.service.layers;
-    this.pathPrefix = FileManager.validatePrefix(this.serverless.service.custom['serverless-lambda-layer-packager'].pathPrefix);
-    this.runtime = this.serverless.service.custom['serverless-lambda-layer-packager'].runtime;
-
     this.commands = {};
 
     this.hooks = {
+      'initialize': () => this.init.bind(this),
       'before:package:initialize': this.beforeCompilePackage.bind(this),
       'after:package:finalize': this.afterCompilePackage.bind(this),
     };
+  }
+
+  init() {
+    this.layers = this.serverless.service.layers;
+    this.pathPrefix = FileManager.validatePrefix(this.serverless.service.custom['serverless-lambda-layer-packager'].pathPrefix);
+    this.runtime = this.serverless.service.custom['serverless-lambda-layer-packager'].runtime;
   }
 
   beforeCompilePackage() {
