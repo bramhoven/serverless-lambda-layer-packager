@@ -11,9 +11,9 @@ class ServerlessLambdaLayerPackager {
     this.commands = {};
 
     this.hooks = {
-      'initialize': () => this.init.bind(this),
-      'before:package:initialize': this.beforeCompilePackage.bind(this),
-      'after:package:finalize': this.afterCompilePackage.bind(this),
+      'initialize': () => this.init(),
+      'before:package:initialize': () => this.beforeCompilePackage(),
+      'after:package:finalize': () => this.afterCompilePackage(),
     };
   }
 
