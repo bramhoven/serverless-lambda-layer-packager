@@ -41,6 +41,9 @@ class ServerlessLambdaLayerPackager {
 
   afterCompilePackage() {
     for(let layer of Object.keys(this.layers)) {
+      if (this.layers[layer].name.endsWith('python-requirements'))
+        continue;
+
       let path = FileManager.validatePrefix(this.layers[layer].path);
       let layerDir = FileManager.normalizePath(FileManager.getWorkDir() + path);
       let packagedDir = FileManager.normalizePath(FileManager.getWorkDir() + path + '/' + this.pathPrefix + '/' + layer.toLowerCase());
