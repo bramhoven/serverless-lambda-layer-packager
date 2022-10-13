@@ -8,16 +8,19 @@ class ServerlessLambdaLayerPackager {
     this.serverless = serverless;
     this.options = options;
     
-    this.layers = this.serverless.service.layers;
-    this.pathPrefix = FileManager.validatePrefix(this.serverless.service.custom['serverless-lambda-layer-packager'].pathPrefix);
-    this.runtime = this.serverless.service.custom['serverless-lambda-layer-packager'].runtime;
-
     this.commands = {};
 
     this.hooks = {
-      'before:package:initialize': this.beforeCompilePackage.bind(this),
-      'after:package:finalize': this.afterCompilePackage.bind(this),
+      'initialize': () => this.init(),
+      'before:package:initialize': () => this.beforeCompilePackage(),
+      'after:package:finalize': () => this.afterCompilePackage(),
     };
+  }
+
+  init() {
+    this.layers = this.serverless.service.layers;
+    this.pathPrefix = FileManager.validatePrefix(this.serverless.service.custom['serverless-lambda-layer-packager'].pathPrefix);
+    this.runtime = this.serverless.service.custom['serverless-lambda-layer-packager'].runtime;
   }
 
   beforeCompilePackage() {
@@ -38,6 +41,9 @@ class ServerlessLambdaLayerPackager {
 
   afterCompilePackage() {
     for(let layer of Object.keys(this.layers)) {
+      if (this.layers[layer].name.endsWith('python-requirements'))
+        continue;
+
       let path = FileManager.validatePrefix(this.layers[layer].path);
       let layerDir = FileManager.normalizePath(FileManager.getWorkDir() + path);
       let packagedDir = FileManager.normalizePath(FileManager.getWorkDir() + path + '/' + this.pathPrefix + '/' + layer.toLowerCase());
